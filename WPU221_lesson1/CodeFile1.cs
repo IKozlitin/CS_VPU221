@@ -13,9 +13,14 @@ namespace WPU221_lesson1
         static void gameSelect()
         {
             WriteLine("\t\t\t\t\t *****Выбери игру***** " +
-                "\n\t\t\t\t\t Нажми 1-Викторина " +
-                "\n\t\t\t\t\t Нажми 2-Угадай число");
-            int userNumber = 0;
+                "\n\t\t\t\t\t Нажми 1 - Викторина " +
+                "\n\t\t\t\t\t Нажми 2 - Угадай число");
+            int gameSelection = Int32.Parse(ReadLine());
+            switch (gameSelection)
+            {
+                case 1: startQuiz(); break;
+                case 2: guessNumber(); break;
+            }
         }
 
         //**********************END****************************
@@ -53,7 +58,6 @@ namespace WPU221_lesson1
                     WriteLine("Ответ не верный!");
                 }
             }
-
             WriteLine("Правильных ответов: " + countOfRightAnswers);
             if (countOfRightAnswers == 0)
             {
@@ -75,9 +79,15 @@ namespace WPU221_lesson1
             {
                 WriteLine("МЕГА МОЗГ!");
             }
-
+            
+            WriteLine("Нажми 1 - Начать заново!" + "\nНажми 2 - Выход!");
+            if (Read() == '1')
+            {
+               startQuiz();
+            }
+            while (Read() != '2');
         }
-
+        
         //****************************END****************************
 
         //**********************MAGIC_NUMBER*************************
@@ -121,17 +131,7 @@ namespace WPU221_lesson1
 
             static void Main(string[] args)
             {
-            WriteLine("\t\t\t\t\t *****Выбери игру***** " +
-               "\n\t\t\t\t\t Нажми 1-Викторина " +
-               "\n\t\t\t\t\t Нажми 2-Угадай число");
-            int gameSelection=Int32.Parse(ReadLine());
-            switch (gameSelection)
-            {
-                case 1:  startQuiz(); break;
-                case 2: guessNumber(); break;
-                default: WriteLine("Выход из игры!"); break;
+                gameSelect();
             }
-        }
-        }
-
     }
+}
