@@ -75,6 +75,7 @@ namespace WPU221_lesson1
             {
                 WriteLine("МЕГА МОЗГ!");
             }
+
         }
 
         //****************************END****************************
@@ -87,28 +88,32 @@ namespace WPU221_lesson1
             int magicNumber = rand.Next(0, 100);
             int userNumber = 0;
             int count = 0;
+            int attempt = 10;
+
             do
             {
-                WriteLine("Введи число: ");
+                Write("Число попыток: " + attempt + "\tВведите число: ");
                 userNumber = Int32.Parse(ReadLine());
                 count++;
+                attempt--;
 
-                if(userNumber < magicNumber)
+                if (userNumber < magicNumber)
                 {
-                    WriteLine("Введенное число меньше загаданного!");
+                    WriteLine("Введенное число меньше загаданного!\n");
                 }
-                else if(userNumber > magicNumber)
+                else if (userNumber > magicNumber)
                 {
-                    WriteLine("Введенное число больше загаданного!");
+                    WriteLine("Введенное число больше загаданного!\n");
                 }
-                else if(userNumber == magicNumber)
+                else if (userNumber == magicNumber)
                 {
                     WriteLine("Верно! Загаданное число " + magicNumber);
                     WriteLine($"Тебе понадобилось {count} попыток");
                     break;
                 }
             }
-            while (userNumber != magicNumber);
+            while (attempt != 0 && userNumber != magicNumber);
+            WriteLine("Ты проиграл! Попробуй ещё раз!");
         }
 
         //****************************END****************************
@@ -116,9 +121,16 @@ namespace WPU221_lesson1
 
             static void Main(string[] args)
             {
-                //gameSelect();
-                startQuiz();
-                guessNumber();
+            WriteLine("\t\t\t\t\t *****Выбери игру***** " +
+               "\n\t\t\t\t\t Нажми 1-Викторина " +
+               "\n\t\t\t\t\t Нажми 2-Угадай число");
+            int gameSelection=Int32.Parse(ReadLine());
+            switch (gameSelection)
+            {
+                case 1:  startQuiz(); break;
+                case 2: guessNumber(); break;
+                default: WriteLine("Выход из игры!"); break;
             }
+        }
         }
     }
