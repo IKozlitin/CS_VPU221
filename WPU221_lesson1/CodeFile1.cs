@@ -25,21 +25,39 @@ namespace WPU221_lesson1
 
         //**********************END****************************
 
+        //********************REPLAY***************************
+
+        static void gameReplay()
+        {
+            WriteLine("\t\t\t\t\t *****Конец игры***** " + 
+                     "\n\t\t\t\t\tНажми 1 - Выбор игры!" + 
+                     "\n\t\t\t\t\tНажми 2 - Выход!");
+            int gameReplay = Int32.Parse(ReadLine());
+            switch (gameReplay)
+            {
+                case 1: Clear(); gameSelect(); break;
+            }
+            while (Read() != '2');
+        }
+        //**********************END****************************
+
         //*******************START_QUIZ************************
         static void startQuiz()
         {
             string[] questions =
             {
-                "Самая высокая гора? ",
-                "Самая длинная река? ",
-                "Самая большая страна? ",
-                "Самая большая планета? ",
-                "Первый человек в космосе? ",
-                "Столица России? ", "Столица Китая? ", "Столица Франции? ", "Столица Германии? ", "Столица Италии? "
+                "1) Самая высокая гора? ",
+                "2) Самая длинная река? ",
+                "3) Самая большая страна? ",
+                "4) Самая большая планета? ",
+                "5) Первый человек в космосе? ",
+                "6) Столица России? ", "7) Столица Китая? ", "8) Столица Франции? ",
+                "9) Столица Германии? ", "10) Столица Италии? "
             };
             string[] answers =
             {
-                "эверест", "амазонка", "россия", "юпитер", "гагарин", "москва", "пекин", "париж", "берлин", "рим"
+                "эверест", "амазонка", "россия", "юпитер", "гагарин",
+                "москва", "пекин", "париж", "берлин", "рим"
             };
             int countOfRightAnswers = 0;
             string userAnswer;
@@ -51,11 +69,11 @@ namespace WPU221_lesson1
                 if (userAnswer.ToLower() == answers[i])
                 {
                     countOfRightAnswers++;
-                    WriteLine("Ответ верный!");
+                    WriteLine("Ответ верный!\n");
                 }
                 else
                 {
-                    WriteLine("Ответ не верный!");
+                    WriteLine("Ответ не верный!\n");
                 }
             }
             WriteLine("Правильных ответов: " + countOfRightAnswers);
@@ -79,15 +97,9 @@ namespace WPU221_lesson1
             {
                 WriteLine("МЕГА МОЗГ!");
             }
-            
-            WriteLine("Нажми 1 - Начать заново!" + "\nНажми 2 - Выход!");
-            if (Read() == '1')
-            {
-               startQuiz();
-            }
-            while (Read() != '2');
+            gameReplay();
         }
-        
+
         //****************************END****************************
 
         //**********************MAGIC_NUMBER*************************
@@ -109,13 +121,13 @@ namespace WPU221_lesson1
 
                 if (userNumber < magicNumber)
                 {
-                    WriteLine("Введенное число меньше загаданного!\n");
+                    WriteLine("Введенное число - " + userNumber + " меньше загаданного!\n");
                 }
                 else if (userNumber > magicNumber)
                 {
-                    WriteLine("Введенное число больше загаданного!\n");
+                    WriteLine("Введенное число - " + userNumber + " больше загаданного!\n");
                 }
-                else if (userNumber == magicNumber)
+                else if (userNumber == magicNumber || attempt != 0)
                 {
                     WriteLine("Верно! Загаданное число " + magicNumber);
                     WriteLine($"Тебе понадобилось {count} попыток");
@@ -123,7 +135,8 @@ namespace WPU221_lesson1
                 }
             }
             while (attempt != 0 && userNumber != magicNumber);
-            WriteLine("Ты проиграл! Попробуй ещё раз!");
+            WriteLine("Попробуй ещё раз!");
+            gameReplay();  
         }
 
         //****************************END****************************
